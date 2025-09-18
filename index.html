@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning Formation Q4 2025 | Vue d'Ensemble</title>
+    <style>
+        :root {
+            --mocha-mousse: #8B4513;
+            --moonlit-grey: #8B9DC3;
+            --wheatfield-beige: #F5E6D3;
+            --ethereum-blue: #A8DADC;
+            --burnt-orange: #CC7A00;
+            --sage-green: #9CAF88;
+            --deep-charcoal: #2C2C2C;
+            --warm-white: #FEFCF8;
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--mocha-mousse) 0%, var(--deep-charcoal) 100%);
+            color: var(--deep-charcoal);
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 40px 0 30px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            color: var(--warm-white);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--wheatfield-beige);
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .metric-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--warm-white);
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, var(--ethereum-blue), var(--sage-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: var(--wheatfield-beige);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .legend {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .legend-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--warm-white);
+            margin-bottom: 16px;
+        }
+
+        .legend-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .legend-text {
+            color: var(--warm-white);
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        /* Layout 3 colonnes pour les mois */
+        .calendar-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .month-card {
+            background: var(--warm-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 157, 195, 0.2);
+        }
+
+        .month-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .month-header {
+            background: linear-gradient(135deg, var(--mocha-mousse), var(--burnt-orange));
+            padding: 16px;
+            position: relative;
+        }
+
+        .month-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--warm-white);
+            text-align: center;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .day-header {
+            background: linear-gradient(180deg, var(--moonlit-grey), var(--wheatfield-beige));
+            color: var(--deep-charcoal);
+            padding: 8px 4px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border-right: 1px solid rgba(139, 157, 195, 0.3);
+        }
+
+        .day-header:last-child {
+            border-right: none;
+        }
+
+        .day-cell {
+            min-height: 100px;
+            padding: 6px;
+            border-right: 1px solid rgba(139, 157, 195, 0.2);
+            border-bottom: 1px solid rgba(139, 157, 195, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: var(--warm-white);
+        }
+
+        .day-cell:last-child {
+            border-right: none;
+        }
+
+        .day-cell:hover {
+            background: linear-gradient(135deg, var(--wheatfield-beige), rgba(168, 218, 220, 0.1));
+            transform: scale(1.02);
+            z-index: 5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .day-number {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--deep-charcoal);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .empty-day {
+            background: linear-gradient(135deg, var(--wheatfield-beige), var(--moonlit-grey));
+            opacity: 0.5;
+        }
+
+        .empty-day .day-number {
+            color: var(--moonlit-grey);
+        }
+
+        .event {
+            background: linear-gradient(135deg, var(--ethereum-blue), var(--sage-green));
+            color: white;
+            padding: 3px 6px;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            font-size: 0.6rem;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            line-height: 1.2;
+        }
+
+        .event:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .event-formation {
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+        }
+
+        .event-prepa {
+            background: linear-gradient(135deg, var(--sage-green), #4ECDC4);
+        }
+
+        .event-externe {
+            background: linear-gradient(135deg, var(--ethereum-blue), #2E86AB);
+        }
+
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 1px;
+            font-size: 0.65rem;
+        }
+
+        .event-time {
+            opacity: 0.9;
+            font-size: 0.55rem;
+            font-weight: 400;
+        }
+
+        .event-participants {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-size: 0.5rem;
+            margin-top: 1px;
+            display: inline-block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 44, 44, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--warm-white);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-elevated);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-30px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--wheatfield-beige);
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--deep-charcoal);
+            margin: 0;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--moonlit-grey);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--burnt-orange);
+            background: var(--wheatfield-beige);
+        }
+
+        .modal-body {
+            color: var(--deep-charcoal);
+            line-height: 1.6;
+        }
+
+        .modal-detail {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: var(--wheatfield-beige);
+            border-radius: 10px;
+        }
+
+        .modal-icon {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--ethereum-blue), var(--sage-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .calendar-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .month-card {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .day-cell {
+                min-height: 120px;
+                padding: 8px;
+            }
+            
+            .event {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .hero-section {
+                padding: 20px 0 20px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .metric-card {
+                padding: 16px 12px;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            .month-header {
+                padding: 12px;
+            }
+            
+            .month-title {
+                font-size: 1.1rem;
+            }
+            
+            .day-cell {
+                min-height: 90px;
+                padding: 4px;
+            }
+            
+            .event {
+                font-size: 0.55rem;
+                padding: 2px 4px;
+            }
+            
+            .event-title {
+                font-size: 0.6rem;
+            }
+            
+            .event-time {
+                font-size: 0.5rem;
+            }
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            z-index: 100;
+        }
+
+        .floating-action:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-elevated);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero-section">
+            <h1 class="hero-title">Planning Formation Premium Q4</h1>
+            <p class="hero-subtitle">Octobre • Novembre • Décembre 2025</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">24</div>
+                    <div class="metric-label">Sessions Totales</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">42</div>
+                    <div class="metric-label">Participants</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">Heures Formation</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Taux Occupation</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="legend">
+            <h3 class="legend-title">Types de Formations</h3>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color event-formation"></div>
+                    <span class="legend-text">Formations Aigue Marine</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color event-prepa"></div>
+                    <span class="legend-text">Sessions Préparation</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color event-externe"></div>
+                    <span class="legend-text">Formations Externes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <!-- OCTOBRE 2025 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h2 class="month-title">🍂 Octobre 2025</h2>
+                </div>
+                <div class="calendar-grid">
+                    <div class="day-header">Lun</div>
+                    <div class="day-header">Mar</div>
+                    <div class="day-header">Mer</div>
+                    <div class="day-header">Jeu</div>
+                    <div class="day-header">Ven</div>
+                    <div class="day-header">Sam</div>
+                    <div class="day-header">Dim</div>
+                    
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell"><div class="day-number">1</div></div>
+                    <div class="day-cell"><div class="day-number">2</div></div>
+                    <div class="day-cell"><div class="day-number">3</div></div>
+                    <div class="day-cell"><div class="day-number">4</div></div>
+                    <div class="day-cell"><div class="day-number">5</div></div>
+                    
+                    <div class="day-cell"><div class="day-number">6</div></div>
+                    <div class="day-cell"><div class="day-number">7</div></div>
+                    <div class="day-cell"><div class="day-number">8</div></div>
+                    <div class="day-cell" onclick="showEventDetails('Formation Aigue Marine', '9h - 18h', '2 Externes', 'formation')">
+                        <div class="day-number">9</div>
+                        <div class="event event-formation">
+                            <div class="event-title">Aigue Marine Formation</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Aigue Marine Prépa', '9h - 18h', '2 Externes', 'prepa')">
+                        <div class="day-number">10</div>
+                        <div class="event event-prepa">
+                            <div class="event-title">Aigue Marine Prépa</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">11</div></div>
+                    <div class="day-cell"><div class="day-number">12</div></div>
+                    
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '17h - 21h', '2 Externes', 'externe')">
+                        <div class="day-number">13</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Externe</div>
+                            <div class="event-time">17h - 21h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">14</div></div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '7h - 10h', '1 Externe', 'externe')">
+                        <div class="day-number">15</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Matinale</div>
+                            <div class="event-time">7h - 10h</div>
+                            <div class="event-participants">1 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '6h - 9h30', '2 Externes', 'externe')">
+                        <div class="day-number">16</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Matinale</div>
+                            <div class="event-time">6h - 9h30</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">17</div></div>
+                    <div class="day-cell"><div class="day-number">18</div></div>
+                    <div class="day-cell"><div class="day-number">19</div></div>
+                    
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '9h - 18h', '2 Externes', 'externe')">
+                        <div class="day-number">20</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Complète</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">21</div></div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '9h - 18h', '2 Externes', 'externe')">
+                        <div class="day-number">22</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Complète</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '9h - 18h', '2 Externes', 'externe')">
+                        <div class="day-number">23</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Complète</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '9h - 18h', '2 Externes', 'externe')">
+                        <div class="day-number">24</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Complète</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">25</div></div>
+                    <div class="day-cell"><div class="day-number">26</div></div>
+                    
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '9h - 18h', '2 Externes', 'externe')">
+                        <div class="day-number">27</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Complète</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">28</div></div>
+                    <div class="day-cell"><div class="day-number">29</div></div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe Nocturne', '1h - 7h', '2 Externes', 'externe')">
+                        <div class="day-number">30</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Nocturne</div>
+                            <div class="event-time">1h - 7h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">31</div></div>
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell empty-day"></div>
+                </div>
+            </div>
+
+            <!-- NOVEMBRE 2025 -->
+            <div class="month-card">
+                <div class="month-header">
+                    <h2 class="month-title">🍁 Novembre 2025</h2>
+                </div>
+                <div class="calendar-grid">
+                    <div class="day-header">Lun</div>
+                    <div class="day-header">Mar</div>
+                    <div class="day-header">Mer</div>
+                    <div class="day-header">Jeu</div>
+                    <div class="day-header">Ven</div>
+                    <div class="day-header">Sam</div>
+                    <div class="day-header">Dim</div>
+                    
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell empty-day"></div>
+                    <div class="day-cell"><div class="day-number">1</div></div>
+                    <div class="day-cell"><div class="day-number">2</div></div>
+                    
+                    <div class="day-cell"><div class="day-number">3</div></div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '6h - 15h', '2 Externes', 'externe')">
+                        <div class="day-number">4</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Étendue</div>
+                            <div class="event-time">6h - 15h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe', '9h - 18h', '2 Externes', 'externe')">
+                        <div class="day-number">5</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Complète</div>
+                            <div class="event-time">9h - 18h</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell"><div class="day-number">6</div></div>
+                    <div class="day-cell"><div class="day-number">7</div></div>
+                    <div class="day-cell"><div class="day-number">8</div></div>
+                    <div class="day-cell"><div class="day-number">9</div></div>
+                    
+                    <div class="day-cell" onclick="showEventDetails('Session Externe Courte', '9h - 12h', '1 Externe', 'externe')">
+                        <div class="day-number">10</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session Matinée</div>
+                            <div class="event-time">9h - 12h</div>
+                            <div class="event-participants">1 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe (à confirmer)', '6h - 15h ?', '2 Externes', 'externe')">
+                        <div class="day-number">11</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session à Confirmer</div>
+                            <div class="event-time">6h - 15h ?</div>
+                            <div class="event-participants">2 Ext.</div>
+                        </div>
+                    </div>
+                    <div class="day-cell" onclick="showEventDetails('Session Externe (à confirmer)', '6h - 15h ?', '2 Externes', 'externe')">
+                        <div class="day-number">12</div>
+                        <div class="event event-externe">
+                            <div class="event-title">Session à Confirmer</div>
+                            <div class="event-time">6h - 15h ?</div>
+                            <div class="
