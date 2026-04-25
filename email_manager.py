@@ -72,14 +72,25 @@ def marquer_lu(message_id):
     ).execute()
 
 
-def _extraire_corps(payload):
-    if 'body' in payload and payload['body'].get('data'):
-        return base64.urlsafe_b64decode(payload['body']['data']).decode('utf-8', errors='ignore')
+def _decode_base64(data):
+    # Gmail omits base64url padding — normalize before decoding
+    padding = 4 - len(data) % 4
+    if padding != 4:
+        data += '=' * padding
+    return base64.urlsafe_b64decode(data)
 
-    if 'parts' in payload:
-        for part in payload['parts']:
-            if part['mimeType'] == 'text/plain' and part['body'].get('data'):
-                return base64.urlsafe_b64decode(part['body']['data']).decode('utf-8', errors='ignore')
+
+def _extraire_corps(payload):
+    if payload.get('body', {}).get('data'):
+        return _decode_base64(payload['body']['data']).decode('utf-8', errors='ignore')
+
+    # Recurse into MIME tree (handles multipart/mixed → multipart/alternative → text/plain)
+    for part in payload.get('parts', []):
+        if part.get('mimeType') == 'text/plain' and part.get('body', {}).get('data'):
+            return _decode_base64(part['body']['data']).decode('utf-8', errors='ignore')
+        result = _extraire_corps(part)
+        if result:
+            return result
 
     return ''
 
