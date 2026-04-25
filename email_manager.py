@@ -6,7 +6,7 @@ from gmail_service import get_gmail_service
 
 
 def lire_emails(max_resultats=10, filtre='is:unread'):
-    """Lire les emails de la boite archiatechx@gmail.com"""
+    """Lire les emails du compte authentifié"""
     service = get_gmail_service()
     resultats = service.users().messages().list(
         userId='me',
@@ -39,7 +39,7 @@ def lire_emails(max_resultats=10, filtre='is:unread'):
 
 
 def envoyer_email(destinataire, sujet, corps, html=False):
-    """Envoyer un email depuis archiatechx@gmail.com"""
+    """Envoyer un email depuis le compte authentifié"""
     service = get_gmail_service()
 
     if html:
@@ -81,16 +81,19 @@ def _decode_base64(data):
 
 
 def _extraire_corps(payload):
-    if payload.get('body', {}).get('data'):
+    mime_type = payload.get('mimeType', '')
+
+    # Leaf text/plain: return its data directly
+    if mime_type == 'text/plain' and payload.get('body', {}).get('data'):
         return _decode_base64(payload['body']['data']).decode('utf-8', errors='ignore')
 
-    # Recurse into MIME tree (handles multipart/mixed → multipart/alternative → text/plain)
-    for part in payload.get('parts', []):
-        if part.get('mimeType') == 'text/plain' and part.get('body', {}).get('data'):
-            return _decode_base64(part['body']['data']).decode('utf-8', errors='ignore')
-        result = _extraire_corps(part)
-        if result:
-            return result
+    # Only recurse into multipart containers (or top-level payload with no mimeType)
+    # Never enter leaf parts like image/png or text/html
+    if not mime_type or mime_type.startswith('multipart/'):
+        for part in payload.get('parts', []):
+            result = _extraire_corps(part)
+            if result:
+                return result
 
     return ''
 
